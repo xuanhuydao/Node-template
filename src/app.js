@@ -10,14 +10,16 @@ app.use(helmet());
 app.use(compression());
 
 //init db
-
+require('./models/init.mongodb');
+const { checkOverload } = require('./helpers/checkConnect');
+checkOverload();
 //init routes
 app.get('/', (req, res, next) => {
-  const strCompress = "hello world";
-  return res.status(200).json({
-    message: "welcome to Node-template",
-    metadata: strCompress.repeat(100000)
-  })
+	const strCompress = "hello world";
+	return res.status(200).json({
+		message: "welcome to Node-template",
+		metadata: strCompress.repeat(100000)
+	})
 });
 //handling errors
 
